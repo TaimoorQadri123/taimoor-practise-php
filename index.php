@@ -1,10 +1,7 @@
-<?php 
-include('components/header.php');
+<?php
 include('php/query.php');
-
+include("components/header.php");
 ?>
-		
-
 	<!-- Slider -->
 	<section class="section-slide">
 		<div class="wrap-slick1">
@@ -84,26 +81,24 @@ include('php/query.php');
 		</div>
 	</section>
 
-
 	<!-- Banner -->
 	<div class="sec-banner bg0 p-t-80 p-b-50">
 		<div class="container">
 			<div class="row">
-		
-			   <?php 
-			       $query = $pdo->query("Select * from categories limit 3");
-				   $allcategories = $query->fetchAll(PDO::FETCH_ASSOC);
-				   foreach($allcategories as $category){
-
-				   
-			   ?>
-                    
+				<?php
+				$query = $pdo->query("Select * from categories limit 3");
+				// print_r($query);
+				$allCategories = $query->fetchAll(PDO::FETCH_ASSOC);
+				// print_r($allCategories);
+				foreach($allCategories as $category){
+				
+				?>
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<!-- Block1 -->
 					<div class="block1 wrap-pic-w">
-				<img src="dashmin/img/categories/<?php echo $category['image']?>" alt="IMG-BANNER">
+						<img src="dashmin/img/categories/<?php echo $category['image']?>" alt="IMG-BANNER">
 
-	<a href="product.php?cId=<?php echo $category['image']?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<a href="product.php?cId=<?php echo $category['catId']?>" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 							<div class="block1-txt-child1 flex-col-l">
 								<span class="block1-name ltext-102 trans-04 p-b-8">
 								<?php echo $category['name']?>
@@ -122,11 +117,10 @@ include('php/query.php');
 						</a>
 					</div>
 				</div>
-                       
-				<?php 
-				}
+				<?php				
+				}		
 				?>
-				
+			
 			</div>
 		</div>
 	</div>
@@ -146,39 +140,18 @@ include('php/query.php');
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
 						All Products
 					</button>
-					<?php 
-					$query = $pdo->query("Select * from categories");
-					$allcategories = $query->fetchAll(PDO::FETCH_ASSOC);
-					foreach($allcategories as $category){
-
-					
+					<?php
+					$query = $pdo->query("select * from categories");
+					$allCategories = $query->fetchAll(PDO::FETCH_ASSOC);
+					foreach($allCategories as $category){
 					?>
-
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".<?php echo $category['catId']?>">
-						<?php echo $category['name']?>
+					<?php echo $category['name']?>
 					</button>
-
-					<?php 
-					}
-					?>
-
-					<!-- <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-						Men
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-						Bag
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-						Shoes
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-						Watches
-					</button> -->
+						<?php
+						}
+						?>				
 				</div>
-
 				<div class="flex-w flex-c-m m-tb-10">
 					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
 						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
@@ -191,8 +164,7 @@ include('php/query.php');
 						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 						Search
 					</div>
-				</div>
-				
+				</div>				
 				<!-- Search product -->
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
 					<div class="bor8 dis-flex p-l-15">
@@ -203,7 +175,6 @@ include('php/query.php');
 						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
 					</div>	
 				</div>
-
 				<!-- Filter -->
 				<div class="dis-none panel-filter w-full p-t-10">
 					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
@@ -393,9 +364,8 @@ include('php/query.php');
 					</div>
 				</div>
 			</div>
-
 			<div class="row isotope-grid">
-			<?php
+				<?php
 				$query = $pdo->query("select * from products");
 				$allProducts = $query->fetchAll(PDO::FETCH_ASSOC);
 						foreach($allProducts  as $product){
@@ -413,12 +383,12 @@ include('php/query.php');
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="product-detail.php?id=<?php echo $product['product_id']?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								<?php echo $product['product_name']?>
 								</a>
 
 								<span class="stext-105 cl3">
-								$<?php echo $product['product_price']?>
+									$<?php echo $product['product_price']?>
 								</span>
 							</div>
 
@@ -435,8 +405,8 @@ include('php/query.php');
 				<?php
 				}
 				?>
+	
 
-				
 			</div>
 
 			<!-- Load more -->
@@ -448,6 +418,7 @@ include('php/query.php');
 		</div>
 	</section>
 
-<?php 
-include('components/footer.php');
+
+<?php
+include("components/footer.php");
 ?>

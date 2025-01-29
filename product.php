@@ -1,18 +1,18 @@
-<?php 
+<?php
 include('php/query.php');
-include('components/header.php');
+include("components/header.php");
 ?>
 	
 	<!-- Product -->
 	<div class="bg0 m-t-23 p-b-140">
-		<div class="container">
+		<div class="container p-5">
 			<div class="flex-w flex-sb-m p-b-52">
-				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<!-- <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+				<!-- <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
 						All Products
-					</button> -->
+					</button>
 
-					<!-- <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
 						Women
 					</button>
 
@@ -30,8 +30,8 @@ include('components/header.php');
 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
 						Watches
-					</button> -->
-				</div>
+					</button>
+				</div> -->
 
 				<!-- <div class="flex-w flex-c-m m-tb-10">
 					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
@@ -249,41 +249,35 @@ include('components/header.php');
 			</div>
 
 			<div class="row isotope-grid">
-				
-                  <?php 
-				  if(isset($_GET['cId'])){
-					$categoryId = $_GET['cId'];
-					$query = $pdo->prepare("select * from products where product_cat_id = :cId");
-					$query->bindParam('cId',$categoryId);
-					$query->execute();
-					$allproducts = $query->fetchAll(PDO::FETCH_ASSOC);
-					foreach($allproducts as $product){
-				  
-				  ?>
-
-
+			
+				<?php
+				if(isset($_GET['cId'])){
+			    $categoryId = $_GET['cId'];
+				$query = $pdo->prepare("select * from products where product_cat_id = :cId ");
+				$query->bindParam('cId',$categoryId);
+				$query->execute();
+				$allProducts = $query->fetchAll(PDO::FETCH_ASSOC);
+				// print_r($allProducts);
+				foreach($allProducts as $product){
+				?>
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="dashmin/img/products/<?php echo $product['product_image']?>" alt="IMG-PRODUCT">
-
 							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
 							</a>
 						</div>
-
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="product-detail.php?id=<?php echo $product['product_id']?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								<?php echo $product['product_name']?>
 								</a>
-
 								<span class="stext-105 cl3">
-								<?php echo $product['product_price']?>
+									$<?php echo $product['product_price']?>
 								</span>
 							</div>
-
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
@@ -293,14 +287,13 @@ include('components/header.php');
 						</div>
 					</div>
 				</div>
-
-				<?php 
-
-                                  }
-
+				<?php
+				}
 				}
 				?>
-				
+
+
+
 			</div>
 
 			<!-- Load more -->
@@ -312,6 +305,6 @@ include('components/header.php');
 		</div>
 	</div>
 		
-	<?php 
-include('components/footer.php');
-?>
+	<?php
+	include("components/footer.php");
+	?>
